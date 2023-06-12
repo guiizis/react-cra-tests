@@ -3,23 +3,43 @@ import './App.css';
 
 class App extends Component {
   state = {
-    posts: [
-      {
-        id: 1,
-        title: 'teste 1',
-        body: 'body 1'
-      },
-      {
-        id: 2,
-        title: 'teste 2',
-        body: 'body 2'
-      },
-      {
-        id: 3,
-        title: 'teste 3',
-        body: 'body 3'
-      },
-    ]
+    posts: []
+  }
+
+  handleTimeOut = () => {
+    console.log('test');
+    this.setState({
+      posts: [
+        {
+          id: 1,
+          title: 'teste 1',
+          body: 'body 1'
+        },
+        {
+          id: 2,
+          title: 'teste 2',
+          body: 'body 2'
+        },
+        {
+          id: 3,
+          title: 'teste 3',
+          body: 'body 3'
+        },
+      ]
+    })
+  }
+
+  componentDidMount() {
+    this.handleTimeOut();
+  }
+
+  componentDidUpdate() {
+    console.log('test 2')
+    // this.handleTimeOut();
+  }
+
+  componentWillUnmount() {
+    console.log('test 3')
   }
 
   render() {
@@ -35,7 +55,7 @@ class App extends Component {
               {element.body}
             </h5>
           </div>
-          ))}
+        ))}
       </div>
     )
   }
