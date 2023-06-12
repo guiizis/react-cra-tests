@@ -3,60 +3,56 @@ import './App.css';
 
 class App extends Component {
   state = {
-    posts: []
-  }
-
-  handleTimeOut = () => {
-    console.log('test');
-    this.setState({
-      posts: [
-        {
-          id: 1,
-          title: 'teste 1',
-          body: 'body 1'
-        },
-        {
-          id: 2,
-          title: 'teste 2',
-          body: 'body 2'
-        },
-        {
-          id: 3,
-          title: 'teste 3',
-          body: 'body 3'
-        },
-      ]
-    })
+    posts: [],
+    photos: []
   }
 
   componentDidMount() {
-    this.handleTimeOut();
+    this.loadPosts()
   }
 
   componentDidUpdate() {
-    console.log('test 2')
-    // this.handleTimeOut();
+
   }
 
   componentWillUnmount() {
-    console.log('test 3')
+
+  }
+
+  loadPosts = async () => {
+    const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const photosResponse = await fetch('https://jsonplaceholder.typicode.com/photos');
+    const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
+    const postJson = await posts.json();
+    const photosJson = await photos.json();
+
+    const postAndPhotos = postJson.map((element, index)=>{
+      return {...element, cover: photosJson[index].url}
+    })
+
+    this.setState({ posts: postAndPhotos})
   }
 
   render() {
     const { posts } = this.state;
     return (
-      <div className="App">
-        {posts.map(element => (
-          <div key={element.id}>
-            <h1>
-              {element.title}
-            </h1>
-            <h5>
-              {element.body}
-            </h5>
-          </div>
-        ))}
-      </div>
+      <section className='container'>
+        <div className='posts'>
+          {posts.map((element) => (
+            <div className='post' key={element.id} >
+              <img src={element.cover} alt={element.title}></img>
+              <div className='post-content'>
+                <h1>
+                  {element.title}
+                </h1>
+                <h5>
+                  {element.body}
+                </h5>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     )
   }
 }
