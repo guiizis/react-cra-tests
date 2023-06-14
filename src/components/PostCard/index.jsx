@@ -5,9 +5,9 @@ export const PostCard = (props) => {
     <div className='post'>
       <img src={cover} alt={title}></img>
       <div className='post-content'>
-        <h1>
+        <h2>
           {title}
-        </h1>
+        </h2>
         <h5>
           {body}
         </h5>
