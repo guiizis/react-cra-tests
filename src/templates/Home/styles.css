@@ -1,0 +1,11 @@
+.container {
+  background: #eee;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.button-container {
+  min-height: 80px;
+  display: flex;
+  align-items: flex-end;
+}
