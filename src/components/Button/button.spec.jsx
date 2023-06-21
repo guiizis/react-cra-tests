@@ -16,7 +16,7 @@ describe('<Button/>', () => {
     render(<Button text="load more" loadMorePosts={fn} />);
 
     const button = screen.getByRole('button', { name: /load more/i });
-    
+
     fireEvent.click(button);
     expect(fn).toHaveBeenCalled();
   });
@@ -25,7 +25,7 @@ describe('<Button/>', () => {
     render(<Button text="load more" disabled={true} />);
 
     const button = screen.getByRole('button', { name: /load more/i });
-    
+
     expect(button).toBeDisabled();
   });
 
@@ -33,16 +33,16 @@ describe('<Button/>', () => {
     render(<Button text="load more" disabled={false} />);
 
     const button = screen.getByRole('button', { name: /load more/i });
-    
+
     expect(button).toBeEnabled();
   });
 
-  it('should call function on button click', () => {
+  it('should match snapshot', () => {
     const fn = jest.fn();
 
-   const {container} = render(<Button text="load more" loadMorePosts={fn} disabled={false} />);
+    const { container } = render(<Button text="load more" loadMorePosts={fn} disabled={false} />);
 
-   expect(container.firstChild).toMatchSnapshot();
-   
+    expect(container.firstChild).toMatchSnapshot();
+
   });
 })

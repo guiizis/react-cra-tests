@@ -7,3 +7,11 @@ exports[`<Button/> should call function on button click 1`] = `
   load more
 </button>
 `;
+
+exports[`<Button/> should match snapshot 1`] = `
+<button
+  class="button"
+>
+  load more
+</button>
+`;
