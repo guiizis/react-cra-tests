@@ -36,4 +36,13 @@ describe('<Button/>', () => {
     
     expect(button).toBeEnabled();
   });
+
+  it('should call function on button click', () => {
+    const fn = jest.fn();
+
+   const {container} = render(<Button text="load more" loadMorePosts={fn} disabled={false} />);
+
+   expect(container.firstChild).toMatchSnapshot();
+   
+  });
 })
