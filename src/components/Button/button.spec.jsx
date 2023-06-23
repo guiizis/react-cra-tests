@@ -2,9 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { Button } from '.';
 
 describe('<Button/>', () => {
-
   it('should render the button with text', () => {
-    render(<Button text="load more" />);
+    const fn = jest.fn();
+    render(<Button text="load more" loadMorePosts={fn} />);
 
     const button = screen.getByRole('button', { name: /load more/i });
     expect(button).toBeInTheDocument();
@@ -22,15 +22,18 @@ describe('<Button/>', () => {
   });
 
   it('should be disabled when disabled is true', () => {
-    render(<Button text="load more" disabled={true} />);
+    const fn = jest.fn();
 
+    render(<Button text="load more" disabled={true} loadMorePosts={fn} />);
     const button = screen.getByRole('button', { name: /load more/i });
 
     expect(button).toBeDisabled();
   });
 
   it('should be enabled when disabled is false', () => {
-    render(<Button text="load more" disabled={false} />);
+    const fn = jest.fn();
+
+    render(<Button text="load more" disabled={false} loadMorePosts={fn} />);
 
     const button = screen.getByRole('button', { name: /load more/i });
 
@@ -43,6 +46,5 @@ describe('<Button/>', () => {
     const { container } = render(<Button text="load more" loadMorePosts={fn} disabled={false} />);
 
     expect(container.firstChild).toMatchSnapshot();
-
   });
-})
+});
