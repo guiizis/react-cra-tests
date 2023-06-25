@@ -1,6 +1,7 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { render, waitForElementToBeRemoved } from '@testing-library/react';
 import Home from '.';
 
 const handlers = [
@@ -50,7 +51,18 @@ describe('<Home/>', () => {
     render(<Home />);
 
     const noMorePosts = screen.getByText('Não existem Posts');
+
+    expect.assertions(3);
+
     await waitForElementToBeRemoved(noMorePosts);
-    // expect(noMorePosts).toBeInTheDocument();
+
+    const search = screen.getByPlaceholderText(/type your search/i);
+    expect(search).toBeInTheDocument();
+
+    const images = screen.getAllByRole('img', { name: /title/i });
+    expect(images).toHaveLength(3);
+
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
   });
 });
