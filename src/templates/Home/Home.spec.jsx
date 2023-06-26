@@ -96,4 +96,12 @@ describe('<Home/>', () => {
     userEvent.type(search, 'Kamino');
     expect(screen.getByText('Não existem Posts')).toBeInTheDocument();
   });
+
+  it('should load more posts with button', async () => {
+    render(<Home />);
+
+    const button = screen.getByRole('button');
+    expect(button).toBeDisabled();
+  });
+
 });
